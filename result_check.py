@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import difflib
 from twilio.rest import TwilioRestClient
 import smtplib
+from datetime import datetime
 
 
 def send_email(recipient, body):
@@ -54,6 +55,14 @@ a.write(str(now))
 a.close()
 
 
+#Send a message verifying a well running script and not at night
+currhr = datetime.strftime(datetime.now(), '%H')
+if(int(now)%6==0):
+    if(currhr != 00 or currhr != 01 or currhr != 02 or currhr != 03 or currhr != 04 or currhr != 05):
+        msg = "Script is running properly!"
+        myMessage = twilioClient.messages.create(body = msg, from_=myTwilioNumber, to=destCellPhone)
+
+
 #naming the new page and storing website's current state
 f = open('results' + str(now) + '.html', 'w')
 f.write(page)
@@ -78,3 +87,6 @@ if(ratio!=1):
 	print "Messages were sent!"
 else:
 	print "It's all the same most probably..."
+
+
+os.system("D:/Py/wait_until_sleep.py")              #edit your own info

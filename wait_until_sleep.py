@@ -80,7 +80,7 @@ def test():
     user32.MessageBeep(0)
     print("Ok. Now, putting the computer to sleep in 20 seconds!")
     time.sleep(20)
-    os.system("D:/Py/sleep.bat")
+    os.system("D:/Py/sleep.bat")                #edit your own info
     
 
 if __name__=='__main__':
